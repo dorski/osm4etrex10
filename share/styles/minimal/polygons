@@ -1,0 +1,148 @@
+# http://wiki.openstreetmap.org/wiki/GroundTruth_Standard_Garmin_Types#Areas
+# qlandkartegt-1.2.3
+
+# large urban area           0x01
+# small urban area           0x02
+# rural housing area         0x03
+# military base              0x04 OO white (transparent?) area with name sign
+# parking lot                0x05 OO white (transparent?) area with name sign
+# parking garage             0x06 OO white (transparent?) area with name sign
+# airport                    0x07 OO white (transparent?) area with name sign
+# shopping center            0x08 OO white (transparent?) area with name sign
+# marina                     0x09 OO white (transparent?) area with name sign
+# university/college         0x0a OO white (transparent?) area with name sign
+# hospital                   0x0b OO white (transparent?) area with name sign
+# industrial complex         0x0c OO white (transparent?) area with name sign
+# reservation                0x0d OO white (transparent?) area with name sign
+# airport runway             0x0e -- solid light gray area
+# ...
+# man-made area              0x13 OO white (transparent?) area with name sign
+# national park              0x14 -- white (transparent?) area
+# national park              0x15 -- white (transparent?) area
+# national park              0x16 -- white (transparent?) area
+# city park                  0x17 -- white (transparent?) area
+# golf course                0x18 -- white (transparent?) area
+# sports complex             0x19 -- white (transparent?) area
+# cemetery                   0x1a -- white (transparent?) area
+# ...
+# state park                 0x1e -- white (transparent?) area
+# state park                 0x1f -- white (transparent?) area
+# state park                 0x20 -- white (transparent?) area
+# ...
+# ocean                      0x28 ++ solid dark area with name sign
+# blue (unknown)             0x29 ++ solid dark area with name sign
+# ...
+# sea                        0x32 ++ solid dark area with name sign
+# ...
+# blue (unknown)             0x3b ++ solid dark area with name sign
+# large lake                 0x3c ++ solid dark area with name sign
+# large lake                 0x3d ++ solid dark area with name sign
+# medium lake                0x3e ++ solid dark area with name sign
+# medium lake                0x3f ++ solid dark area
+# small lake                 0x40 ++ solid dark area
+# small lake                 0x41 ++ solid dark area
+# major lake                 0x42 ++ solid dark area with name sign
+# major lake                 0x43 ++ solid dark area with name sign
+# large lake                 0x44 ++ solid dark area with name sign
+# large lake                 0x45 ++ solid dark area with name sign
+# major river                0x46 ++ solid dark area with name sign
+# major river                0x47 ++ solid dark area with name sign
+# medium river               0x48 ++ solid dark area
+# small river                0x49 ++ solid dark area
+# (unknown)                  0x4a -- white (transparent?) area
+# (unknown)                  0x4b -- white (transparent?) area
+# intermittent water         0x4c OO thin crossed lines
+# glacier                    0x4d -- white (transparent?) area
+# orchard/plantation         0x4e -- camouflage like patches
+# scrub                      0x4f OO small patches
+# forest                     0x50 -- big patches
+# wetland/swamp              0x51 ++ wetland like, good visibility
+# tundra                     0x52 -- white (transparent?) area
+# flat                       0x53 -- white (transparent?) area with name sign
+
+waterway=riverbank
+	{ name '$(name)' }
+	[ 0x000046 level 0 ]
+waterway=boatyard
+	{ name '$(name)' }
+	[ 0x000029 level 0 ]
+waterway=dock
+	{ name '$(name)' }
+	[ 0x000029 level 0 ]
+
+landuse=reservoir
+	{ name '$(name)' }
+	[ 0x000029 level 0 ]
+landuse=basin
+	{ name '$(name)' }
+	[ 0x000029 level 0 ]
+
+place=island | place=islet
+	{ name '$(name)' }
+	[ 0x000053 level 0 ]
+
+# residential et al. landuse can be inferred from the road patterns
+#landuse=residential          [0x54 level 0]
+#landuse=retail               [0x54 level 0]
+#landuse=industrial           [0x55 level 0]
+#landuse=commercial           [0x55 level 0]
+
+natural=water
+	{ name '$(name)' }
+	[ 0x000044 level 0 ]
+natural=wetland
+	{ name '$(name)' }
+	[ 0x000051 level 0 ]
+natural=mud
+	{ name '$(name)' }
+	[ 0x000051 level 0 ]
+
+# this is hard to see on the display anyway
+#natural=beach                [0x53 level 0 default_name '[beach]']
+#natural=sand                 [0x53 level 0 default_name '[sand]']
+#natural=heath                [0x53 level 0 default_name '[heath]']
+#natural=scree                [0x53 level 0 default_name '[scree]']
+
+natural=grassland
+	{ name '$(name)' }
+	[ 0x000052 level 0 ]
+landuse=grass
+	{ name '$(name)' }
+	[ 0x000052 level 0 ]
+landuse=meadow
+	{ name '$(name)' }
+	[ 0x000052 level 0 ]
+landuse=farm
+	{ name '$(name)' }
+	[ 0x000052 level 0 ]
+landuse=farmland
+	{ name '$(name)' }
+	[ 0x000052 level 0 ]
+natural=scrub
+	{ name '$(name)' }
+	[ 0x00004f level 0 ]
+natural=wood
+	{ name '$(name)' }
+	[ 0x000050 level 0 ]
+landuse=forest
+	{ name '$(name)' }
+	[ 0x000050 level 0 ]
+
+# not crossable or hard to cross areas
+amenity=grave_yard
+	{ name '$(name)' }
+	[ 0x00001a level 0 default_name '[graveyard]' ]
+landuse=cemetery
+	{ name '$(name)' }
+	[ 0x00001a level 0 default_name '[cemetary]' ]
+
+landuse=military
+	{ name '$(name)' }
+	[ 0x000004 level 0 default_name '[military]' ]
+military=*
+	{ name '$(name)' }
+	[ 0x000004 level 0 default_name '[military]' ]
+aeroway=*
+	{ name '$(name)' }
+	[ 0x000004 level 0 default_name '[aeroway]' ]
+#landuse=railway              [0x04 level 0 default_name '[railway]']

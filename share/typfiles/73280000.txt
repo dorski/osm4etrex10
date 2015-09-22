@@ -1,0 +1,615 @@
+[_id]
+FID=73280000
+ProductCode=1
+CodePage=1252
+[end]
+
+[_drawOrder]
+; water features
+Type=0x029,1
+Type=0x044,1
+Type=0x046,1
+; islands
+Type=0x053,2
+; botanical features
+Type=0x04f,3
+Type=0x050,3
+Type=0x051,3
+Type=0x052,3
+; man-made features
+Type=0x01a,4
+Type=0x004,4
+[end]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; General remarks on style consistency ;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; Roads are always painted as black lines. Ferry lines are white.
+; Area markers (land cover/use, restricted areas, ...)
+; is drawn gray (#AAAAAA).
+;
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; POINTS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; POI definitions on eTrex10 are really tricky.
+; What doesn't work: 12x12, 11x11 (this seems to be the native format)
+;
+
+;; Settlements: only text
+;[_point]
+;Type=0x0100
+;String=0x04,City
+;FontStyle=LargeFont
+;Xpm="0 0 1 1"
+;"  c none"
+;""
+;Xpm="1 1 1 1"
+;"  c none"
+;" "
+[end]
+
+;[_point]
+;Type=0x0700
+;String=0x04,Town
+;FontStyle=LargeFont
+;Xpm="1 1 1 1"
+;"  c none"
+;" "
+;[end]
+
+;[_point]
+;Type=0x0900
+;String=0x04,Village
+;FontStyle=NormalFont
+;Xpm="1 1 1 1"
+;"  c none"
+;" "
+;[end]
+
+;[_point]
+;Type=0x0c00
+;String=0x04,Neighbourhood
+;FontStyle=NormalFont
+;Xpm="1 1 1 1"
+;"  c none"
+;" "
+;[end]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; LINES ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;
+; Borders/boundaries ;
+;;;;;;;;;;;;;;;;;;;;;;
+
+[_line]
+Type=0x1e
+String=0x04,International border
+FontStyle=NoLabel
+UseOrientation=Y
+Xpm="32 2 2 1"
+"# c #FF0000"
+"  c none"
+"#######  ##  ##  ##  ###########"
+"#######  ##  ##  ##  ###########"
+[end]
+
+[_line]
+Type=0x1c
+String=0x04,State/province border
+FontStyle=NoLabel
+UseOrientation=Y
+Xpm="32 1 2 1"
+"# c #FF0000"
+"  c none"
+"###########  ##  ##  ###########"
+[end]
+
+[_line]
+Type=0x1d
+String=0x04,County/parish border
+FontStyle=NoLabel
+UseOrientation=Y
+Xpm="32 1 2 1"
+"# c #FF0000"
+"  c none"
+"##########  ##  ##########  ##  "
+[end]
+
+
+;;;;;;;;;;;;;;;;
+; land contour ;
+;;;;;;;;;;;;;;;;
+
+[_line]
+Type=0x20
+String=0x04,minor land contour
+FontStyle=NoLabel
+LineWidth=1
+UseOrientation=N
+Xpm="0 0 1 0"
+"# c #AAAAAA"
+
+[_line]
+Type=0x21
+String=0x04,medium land contour
+FontStyle=NoLabel
+LineWidth=1
+UseOrientation=N
+Xpm="0 0 1 0"
+"# c #AAAAAA"
+
+[_line]
+Type=0x22
+String=0x04,major land contour
+FontStyle=NoLabel
+LineWidth=1
+UseOrientation=N
+Xpm="0 0 1 0"
+"# c #AAAAAA"
+
+;;;;;;;;;;;;;;;;;;;;
+; Roads/paths/ways ;
+;;;;;;;;;;;;;;;;;;;;
+
+[_line]
+Type=0x01
+String=0x04,Major highway
+FontStyle=NoLabel
+LineWidth=4
+Xpm="0 0 1 0"
+"# c #444444"
+[end]
+
+[_line]
+Type=0x02
+String=0x04,Principal highway
+FontStyle=NoLabel
+LineWidth=2
+Xpm="0 0 1 0"
+"# c #444444"
+[end]
+
+[_line]
+Type=0x03
+String=0x04,Other highway
+FontStyle=NoLabel
+LineWidth=1
+Xpm="0 0 1 0"
+"# c #444444"
+[end]
+
+[_line]
+Type=0x06
+String=0x04,Residential street
+FontStyle=NoLabel
+LineWidth=1
+Xpm="0 0 1 0"
+"# c #444444"
+[end]
+
+[_line]
+Type=0x08
+String=0x04,Highway ramp, low speed
+FontStyle=NoLabel
+LineWidth=2
+Xpm="0 0 1 0"
+"# c #444444"
+[end]
+
+[_line]
+Type=0x09
+String=0x04,Highway ramp, high speed
+FontStyle=NoLabel
+LineWidth=4
+Xpm="0 0 1 0"
+"# c #444444"
+[end]
+
+[_line]
+Type=0x0a
+String=0x04,Minor road, bikeable
+FontStyle=NoLabel
+UseOrientation=Y
+Xpm="32 1 2 1"
+"# c #444444"
+"  c none"
+"######  ######  ######  ######  "
+[end]
+
+[_line]
+Type=0x0c
+String=0x04,Roundabout
+FontStyle=NoLabel
+UseOrientation=Y
+Xpm="32 1 1 1"
+"# c #444444"
+"################################"
+[end]
+
+[_line]
+Type=0x16
+String=0x04,Trail
+FontStyle=NoLabel
+UseOrientation=Y
+Xpm="32 1 2 1"
+"# c #444444"
+"  c none"
+"######  ######  ######  ######  "
+[end]
+
+[_line]
+;Type=0x14
+Type=0x0e
+String=0x04,Railroad
+FontStyle=NoLabel
+UseOrientation=Y
+Xpm="32 3 2 1"
+"# c #444444"
+"  c #FFFFFF"
+"################################"
+"####    ####    ####    ####    "
+"################################"
+[end]
+
+[_line]
+Type=0x1a
+String=0x04,Ferry
+FontStyle=NoLabel
+UseOrientation=Y
+Xpm="32 1 2 1"
+"# c #FFFFFF"
+"  c none"
+"######  ######  ######  ######  "
+[end]
+
+[_line]
+Type=0x2d
+String=0x04,Aerialway
+FontStyle=NoLabel
+UseOrientation=Y
+Xpm="32 5 2 1"
+"# c #444444"
+"  c none"
+" #               #              "
+"###             ###             "
+"# ############### ##############"
+"###             ###             "
+" #               #              "
+[end]
+
+;;;;;;;;;;;;;;;;;
+; rivers et al. ;
+;;;;;;;;;;;;;;;;;
+
+[_line]
+Type=0x1f
+String=0x04,river, canal
+FontStyle=NoLabel
+LineWidth=3
+Xpm="0 0 1 1"
+"# c #AAAAAA"
+[end]
+
+[_line]
+Type=0x18
+String=0x04,stream
+FontStyle=NoLabel
+LineWidth=2
+Xpm="0 0 1 1"
+"# c #AAAAAA"
+[end]
+
+[_line]
+Type=0x26
+String=0x04,drain, ditch
+FontStyle=NoLabel
+LineWidth=1
+Xpm="0 0 1 1"
+"# c #AAAAAA"
+[end]
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; POLYGONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[_polygon]
+Type=0x04
+String=0x04,Military area
+FontStyle=NoLabel
+Xpm="32 32 2 1"
+"# c #FF0000"
+"  c none"
+"#     # #     # #     # #     # "
+" #   #   #   #   #   #   #   #  "
+"  # #     # #     # #     # #   "
+"                                "
+"  # #     # #     # #     # #   "
+" #   #   #   #   #   #   #   #  "
+"#     # #     # #     # #     # "
+"                                "
+"#     # #     # #     # #     # "
+" #   #   #   #   #   #   #   #  "
+"  # #     # #     # #     # #   "
+"                                "
+"  # #     # #     # #     # #   "
+" #   #   #   #   #   #   #   #  "
+"#     # #     # #     # #     # "
+"                                "
+"#     # #     # #     # #     # "
+" #   #   #   #   #   #   #   #  "
+"  # #     # #     # #     # #   "
+"                                "
+"  # #     # #     # #     # #   "
+" #   #   #   #   #   #   #   #  "
+"#     # #     # #     # #     # "
+"                                "
+"#     # #     # #     # #     # "
+" #   #   #   #   #   #   #   #  "
+"  # #     # #     # #     # #   "
+"                                "
+"  # #     # #     # #     # #   "
+" #   #   #   #   #   #   #   #  "
+"#     # #     # #     # #     # "
+"                                "
+[end]
+
+[_polygon]
+Type=0x1a
+String=0x04,Grave yard
+FontStyle=NoLabel
+Xpm="32 32 2 1"
+"# c #555555"
+"  c none"
+"           #       #       #    "
+"   #               #     ## ##  "
+"   #               #       #    "
+" ## ##     #               #    "
+"   #       #               #    "
+"   #     ## ##     #            "
+"   #       #       #            "
+"           #     ## ##     #    "
+"           #       #       #    "
+"   #               #     ## ##  "
+"   #               #       #    "
+" ## ##     #               #    "
+"   #       #               #    "
+"   #     ## ##     #            "
+"   #       #       #            "
+"           #     ## ##     #    "
+"           #       #       #    "
+"   #               #     ## ##  "
+"   #               #       #    "
+" ## ##     #               #    "
+"   #       #               #    "
+"   #     ## ##     #            "
+"   #       #       #            "
+"           #     ## ##     #    "
+"           #       #       #    "
+"   #               #     ## ##  "
+"   #               #       #    "
+" ## ##     #               #    "
+"   #       #               #    "
+"   #     ## ##     #            "
+"   #       #       #            "
+"           #     ## ##     #    "
+[end]
+
+[_polygon]
+Type=0x29
+String=0x04,boatyard, dock, basin
+FontStyle=NoLabel
+Xpm="0 0 1 1"
+"# c #AAAAAA"
+[end]
+
+[_polygon]
+Type=0x44
+String=0x04,Water
+FontStyle=NoLabel
+Xpm="0 0 1 1"
+"# c #AAAAAA"
+[end]
+
+[_polygon]
+Type=0x46
+String=0x04,Riverbank
+FontStyle=NoLabel
+Xpm="0 0 1 1"
+"# c #AAAAAA"
+[end]
+
+[_polygon]
+Type=0x53
+String=0x04,Island
+FontStyle=NoLabel
+Xpm="0 0 1 1"
+"# c #FFFFFF"
+[end]
+
+[_polygon]
+Type=0x4f
+String=0x04,Scrub
+FontStyle=NoLabel
+Xpm="32 32 2 1"
+"# c #00FF00"
+"  c none"
+"                  # #           "
+"   #              # #           "
+" # # #             #            "
+" # # #           ######         "
+"  # #                           "
+"  # #                           "
+"   #                            "
+" ######                         "
+"                                "
+"                                "
+"                                "
+"                                "
+"                                "
+"                   #            "
+"                 # # #          "
+"                 # # #          "
+"                  # #           "
+"   #              # #           "
+" # # #             #            "
+" # # #           ######         "
+"  # #                           "
+"  # #                           "
+"   #                            "
+" ######                         "
+"                                "
+"                                "
+"                                "
+"                                "
+"                                "
+"                   #            "
+"                 # # #          "
+"                 # # #          "
+[end]
+
+[_polygon]
+Type=0x50
+String=0x04,Forest/wood
+FontStyle=NoLabel
+Xpm="32 32 2 1"
+"# c #00FF00"
+"  c none"
+"                                "
+"                                "
+"       #                        "
+" #     #        #               "
+"      # #                       "
+"      # #                       "
+"     #   #                 #    "
+"     #   #                      "
+"    #     ###                   "
+"                                "
+"                     #          "
+"     #                          "
+"                            #   "
+"                                "
+"                                "
+"                 #              "
+"          #                     "
+"                                "
+"                                "
+"                                "
+"                    ###         "
+"                   #   #        "
+"                  #     #       "
+"                  #     #     # "
+"                   #   #        "
+"                    # #         "
+"                    #  ####     "
+"    #                           "
+"                 #              "
+"                                "
+"                           #    "
+"        #                       "
+[end]
+
+[_polygon]
+Type=0x51
+String=0x04,Wetland/swamp
+FontStyle=NoLabel
+Xpm="32 32 2 1"
+"# c #AAAAAA"
+"  c none"
+"                                "
+" ##########                     "
+"                                "
+"    #########                   "
+"                                "
+"                         #      "
+"                                "
+"      #                         "
+"                                "
+"                 ##########     "
+"                                "
+"                    #########   "
+"                                "
+"        #                       "
+"                                "
+"                   #            "
+"                                "
+" ##########                     "
+"                                "
+"    #########                   "
+"                                "
+"             #                  "
+"                                "
+"                            #   "
+"                                "
+"                 ##########     "
+"                                "
+"                    #########   "
+"                                "
+"    #                           "
+"                                "
+"                   #            "
+[end]
+
+[_polygon]
+Type=0x52
+String=0x04,grasland
+FontStyle=NoLabel
+Xpm="32 32 2 1"
+"# c #00FF00"
+"  c none"
+"                                "
+" # #                            "
+" # #                            "
+" # #                            "
+"                                "
+"                #               "
+"                                "
+"    #                           "
+"                                "
+"                 # #            "
+"                 # #            "
+"                 # #            "
+"                                "
+"           #                    "
+"                                "
+"                          #     "
+"                                "
+"         # #                    "
+"         # #                    "
+"         # #                    "
+"                                "
+"                      #         "
+"                                "
+"  #                             "
+"                                "
+"                         # #    "
+"                         # #    "
+"                         # #    "
+"                                "
+"          #                     "
+"                                "
+"                  #             "
+[end]
+
+;[_polygon]
+;Type=0x53
+;DrawOrder=0
+;String=2,beach/sand/heath/scree
+;[end]
+
+;[_polygon]
+;Type=0x54
+;DrawOrder=0
+;String=2,constructed, residential
+;[end]
+
+;[_polygon]
+;Type=0x55
+;DrawOrder=0
+;String=2,constructed, industrial
+;[end]

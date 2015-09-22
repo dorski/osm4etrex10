@@ -1,0 +1,41 @@
+# lower resolution for a layer will save memory but will be less acurate
+# when zooming in. *All* layers are redrawn with higher precicision
+# on levels with higher resolution.
+
+# IMG: eTrex  -- what should be displayed
+#
+# res: [eTrex] [QLand]
+#  11: ------
+#  --: 800 km
+#  12: 500 km
+#  13: 300 km
+#  --: 200 km
+#  14: 120 km
+#  15:  80 km
+#  --:  50 km
+#  16:  30 km
+#  17:  20 km <-- all cities/towns
+#  --:  12 km
+#  18:   8 km
+#  19:   5 km  10 km
+#  --:   3 km
+#  20:   2 km
+#  21: 1.2 km 3.0 km <-- everything except cities/towns
+#  --: 800 m
+#  22: 500 m
+#  23: 300 m  1.0 km
+#  --: 200 m  
+#  24: 120 m
+#  25:  80 m
+#  --:  50 m
+#    :  30 m
+#    :  20 m
+#    :  12 m
+#    :   8 m
+#    :   5 m
+
+# general size optimizations:
+# few separate maps -- here only two
+# drawing on lower resolutions
+levels=0:22,1:18
+overview-levels=1:18

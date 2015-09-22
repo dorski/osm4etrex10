@@ -1,0 +1,161 @@
+# all POIs are Garmin standard POI types except when stated otherwise
+# !! on eTrex10 level ranges don't work and garble the POI indexes !!
+
+# default: tiny black square
+# 0x1200 -- 0x122f i-sign (small black square with white 'i')
+# 0x0012 i-square
+# 0x001d circle outline with tilde (big)
+# 0x001c black square outline with diamond (big)
+
+###############
+# settlements #
+###############
+
+# typically we know roughly where we are and don't need country information
+mkgmap:country=*
+	{ set mkgmap:country='' }
+
+# optimization trick: using 0x000001 et al. instead of 0x000100 et al.
+# alas, this prevents creation of the cities index (at least with r2643)
+# so we don't use it for proper settlements we want in the index
+# (if any node triggers the index creation, 0x0000XX nodes are added anyway;
+# the whole thing is rather inconsistent on Garmin's side)
+# as a workaround we could use 0x002800 (region name, visible from 1.2km)
+# for settlements we don't want in the index
+
+# on level 3, cities are visible at *any* zoom level,
+# putting cities on a lower level makes them invisible on lower resolutions
+
+place=city
+	{ name '$(name)' }
+	[ 0x000100 level 1 default_name '[city]' ]
+place=town
+	{ name '$(name)' }
+	[ 0x000700 level 1 default_name '[town]' ]
+place=village
+	{ name '$(name)' }
+	[ 0x000900 level 1 default_name '[village]' ] 
+place=hamlet
+	{ name '$(name)' }
+	[ 0x002800 level 0 default_name '[hamlet]' ]
+place=suburb
+	{ name '(${name})' }
+	[ 0x002800 level 0 default_name '[suburb]' ]
+place=neighbourhood
+	{ name '(${name})' }
+	[ 0x002800 level 0 default_name '[neighbourhood]' ]
+place=isolated_dwelling
+	{ name '(${name})' }
+	[ 0x002800 level 0 default_name '[isolated_dwelling]' ]
+place=farm
+	{ name '(${name})' }
+	[ 0x002800 level 0 default_name '[farm]' ] 
+
+####################
+# public transport #
+####################
+
+# 0x002f08 is only displayed at 80m or lower so only level 0 makes sense here
+# 0x002f08 is actually /bus station/
+# indexed: 
+railway=halt
+	{ name '$(name)' }
+	[ 0x002f08 level 0 default_name '[railway_halt]' ]
+railway=station
+	{ name '$(name)' }
+	[ 0x002f08 level 0 default_name '[railway_station]' ]
+
+# indexed: Fuel services
+amenity=fuel
+	{ name '${brand}' | '${operator}' | '${name}' }
+	[ 0x002f01 level 0 default_name '[petrol_station]' ]
+
+# tourism related
+# all 0x002cXX is visable at 80m or lower
+
+# indexed: attractions --> other
+tourism=attraction & historic!=*
+	{ name '$(name)' }
+	[ 0x002c00 level 0 default_name '[attraction]' ]
+tourism=theme_park
+	{ name '$(name)' }
+	[ 0x002c00 level 0 default_name '[theme_park]']
+
+# indexed: attractions --> museum or historical
+tourism=museum
+	{ name '$(name)' }
+	[ 0x002c02 level 0 default_name '[museum]' ]
+historic=*
+	{ name '$(name)' | '[$(historic)]' }
+	[ 0x002c02 level 0 default_name '[historic]' ]
+tourism=artwork
+	[ 0x002c02 level 0 default_name '[artwork]']
+
+# indexed: attractions --> zoo or aquarium
+tourism=zoo
+	{ name '$(name)' }
+	[ 0x002c07 level 0 default_name "[zoo]" ]
+
+# all 0x64.. visible from 800m or lower
+# check if level takes effect at all
+# 0x64..
+# 01 -- schräges Fass?
+# 02 -- großes Gebäude
+# 03 -- Grabstein
+# 04 -- Tempel
+# 05 -- Fahne
+# 06 -- [?]
+# 07 -- Burg
+# 08 -- Kreuz (Krankenhaus)
+# 09 -- [?]
+# 0a -- Kreis (wie Stadt)
+# 0b -- Panzer
+# 0c -- Schaufel+Kreuzhacke (Bergwerk)
+# 0d -- Hochspannungsmast
+# 0e -- Einzelbaum
+# 0f -- Brief
+# 10 -- Glocke
+# 11 -- Turmsymbol
+# 12 -- Wanderer
+# 13 -- Hütte (?)
+# 14 -- Wasserhahn
+# 15 -- Turm mit Uhr
+# 16 -- (und aufwärts): anonymer Punkt
+
+# indexed: geographical points --> manmade places
+amenity=place_of_worship
+	{ name '${name|subst:Kirche~>K|subst:kirche ~>k }' }
+	[ 0x006404 level 0 default_name '[place_of_worship]' ]
+man_made=tower
+	{ name '$(name)' }
+	[ 0x006411 level 0 default_name '[tower]' ]
+man_made=water_tower
+	{ name '$(name)' }
+	[ 0x006411 level 0 default_name '[water_tower]']
+
+# 0x6604 -- beach
+# 0x660a -- (group of trees)
+# 0x6616 -- summit (peak)
+# 0x6618 -- (group of trees)
+
+# indexed: geographical points --> land features
+natural=peak
+	{ name '${name} (${ele}m)' | '${name}' }
+	[ 0x006616 level 0 default_name '[peak]' ]
+natural=volcano
+	{ name '${name} (${ele}m)' | '${name}' }
+	[ 0x006616 level 0 default_name '[volcano]' ]
+natural=glacier
+	{ name '${name} (${ele}m)' | '${name}' }
+	[ 0x006616 level 0 default_name '[glacier]' ]
+natural=stone
+	[ 0x006617 level 0 default_name '[stone]' ]
+
+# 0x0065XX don't have special icons on eTrex 10
+# indexed: geographical points --> water features
+natural=spring
+	{ name '$(name)' }
+	[ 0x006501 level 0 default_name '[spring]' ]
+#natural=water & name=*
+#	{ name '$(name)' }
+#	[ 0x006502 level 0 default_name '[water]' ]

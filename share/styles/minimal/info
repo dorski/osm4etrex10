@@ -1,0 +1,8 @@
+summary: Ways on eTrex 10
+
+version=0.1
+
+description {
+	OSM based street map with minimum memory footprint 
+	suitable for a Garmin eTrex 10
+}

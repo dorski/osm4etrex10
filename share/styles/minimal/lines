@@ -1,0 +1,232 @@
+# Garmin line classes are used as stated by QLandkarteGT-1.5.0
+# and http://wiki.openstreetmap.org/wiki/GroundTruth_Standard_Garmin_Types
+# caution: higher unassigned numbers may not display at all 
+# even when a TYP file is provided
+
+###################################
+# borders #########################
+###################################
+#
+# 0x000019   time zone
+# 0x00001c   state/province border
+# 0x00001d   county/parish border
+# 0x00001e   international border
+# 0x00002a   marine boundary
+# 0x00002b   hazard boundary
+
+# national border
+boundary=administrative & admin_level=2
+	[ 0x00001e level 1 default_name '[boundary]' ]
+# DE:Bundesland, PL:województwa, SE:län
+#boundary=administrative & admin_level=4
+#	[ 0x00001c level 2 default_name '[boundary]' ]
+# DE:Kreis, PL:powiaty, SE:---
+#boundary=administrative & admin_level=6
+#	[ 0x00001d level 1 default_name '[boundary]' ]
+
+###################################
+# topographic features ############
+###################################
+#
+# shoreline                  (0x15)
+# river                      (0x1f)
+# stream (thin)              (0x18)
+# intermittent stream        (0x26)
+#
+# minor land contour         (0x20)
+# intermediate land contour  (0x21)
+# major land contour         (0x22)
+# minor depth contour        (0x23)
+# intermediate depth contour (0x24)
+# major depth contour        (0x25)
+
+natural=coastline
+	[ 0x000015 level 1 ]
+
+waterway=* & length() < 20m
+	{ delete waterway }
+waterway=river
+	{ name '$(name)' }
+	[ 0x00001f level 0 default_name '[river]' ]
+waterway=canal
+	{ name '$(name)' }
+	[ 0x00001f level 0 default_name '[canal]' ]
+waterway=stream
+	{ name '$(name)' }
+	[ 0x000018 level 0 default_name '[stream]' ]
+waterway=drain
+	{ name '$(name)' }
+	[ 0x000026 level 0 default_name '[drain]' ]
+waterway=ditch
+	{ name '$(name)' }
+	[ 0x000026 level 0 default_name '[ditch]' ]
+
+contour_ext=elevation_major & (ele > 0 | ele < 0)
+	{ name '${ele|conv:m=>ft}' } 
+	[ 0x000022 level 0 ]
+contour_ext=elevation_medium & (ele > 0 | ele < 0)
+	{ name '${ele|conv:m=>ft}' } 
+	[ 0x000021 level 0 ]
+contour_ext=elevation_minor & (ele > 0 | ele < 0)
+	{ name '${ele|conv:m=>ft}' }
+	[ 0x000020 level 0 ]
+
+
+###################################
+# roads of all kinds ##############
+###################################
+#
+# road                       (0x00)
+# major highway              (0x01)
+# major highway connector    (0x0b)
+# principal highway (thick)  (0x02)
+# Other highway (medium)     (0x03)
+# highway ramp, low speed    (0x08)
+# highway ramp, high speed   (0x08)
+#
+# arterial road              (0x04)
+# collector road             (0x05)
+# residential street         (0x06)
+# alley/private road         (0x07)
+#
+# unpaved road (thin)        (0x0a)
+# pedestrian area            (0x0d)
+# major trail                (0x0f)
+# steep track                (0x13)
+# trail                      (0x16)
+#
+# roundabout                 (0x0c)
+#
+# railroad                   (0x14) # visible from <=200m only
+# ferry                      (0x1a)
+# ferry                      (0x1b)
+# airport runway             (0x27)
+#
+# missing descriptions for:
+# 0x0e, 0x10, 0x11, 0x012, 0x17
+
+# ignore roads in tunnels
+highway=* & tunnel=yes
+	{ delete highway }
+
+# name all roads
+highway=* { set short_name = '${name}' | '' }
+
+# German abbreviation rules
+highway=* { set short_name = '${short_name|subst:Straße~>Str|subst:straße$~>str}' }
+highway=* { set short_name = '${short_name|subst:Platz~>Pl|subst:platz$~>pl}' }
+highway=* { set short_name = '${short_name|subst:Weg$~>W|subst:weg$~>w}' }
+highway=* { set short_name = '${short_name|subst:Gasse$~>G|subst:gasse$~>g}' }
+
+# Dutch abbreviation rules
+highway=* { set short_name = '${short_name|subst:Straat~>Str|subst:straat$~>str}' }
+highway=* { set short_name = '${short_name|subst:Plein~>Pl|subst:plein$~>pl}' }
+
+# Spanish abbreviation rules
+highway=* { set short_name = '${short_name|subst:^[cC]alle ~>C }' }
+highway=* { set short_name = '${short_name|subst:^[cC]arrer ~>Cr }' }
+highway=* { set short_name = '${short_name|subst:^[aA]venida ~>Av }' }
+
+highway=* { name
+	'${ref} (${short_name})'
+	| '${short_name}'
+	| '${ref}'
+}
+
+# roads more or less exclusively for car navigation
+# we display cities/towns/villages early
+# so few major roads are needed for broad orientation
+highway=motorway
+	[ 0x000001 level 0 ]
+highway=motorway_link
+	[ 0x000009 level 0 ]
+highway=trunk
+	[ 0x000002 level 0 ]
+highway=trunk_link
+	[ 0x000008 level 0 ]
+highway=primary
+	[ 0x000002 level 0 ]
+highway=primary_link
+	[ 0x000008 level 0 ]
+highway=secondary
+	[ 0x000003 level 0 ]
+highway=secondary_link
+	[ 0x000003 level 0 ]
+highway=tertiary
+	[ 0x000003 level 0 ]
+highway=tertiary_link
+	[ 0x000003 level 0 ]
+
+highway=road
+	[ 0x000006 level 0 ]
+highway=residential
+	[ 0x000006 level 0 ]
+highway=unclassified
+	[ 0x000006 level 0 ]
+
+# roads and tracks for walking navigation
+
+highway=footway
+	[ 0x000016 level 0 ]
+highway=pedestrian
+	[ 0x000016 level 0 ]
+highway=steps
+	[ 0x000016 level 0 ]
+highway=path
+	[ 0x000016 level 0 ]
+highway=bridleway
+	[ 0x000016 level 0 ]
+highway=byway
+	[ 0x000016 level 0 ]
+
+# roads for bicycle navigation
+
+highway=track
+	[ 0x00000a level 0 ]
+highway=cycleway
+	[ 0x00000a level 0 ]
+# higway=service contains lots of tiny little access paths
+highway=service & length() < 20m
+	{ delete highway }
+highway=service
+	[ 0x00000a level 0 ]
+highway=living_street
+	[ 0x00000a level 0 ]
+
+# catch-all (OSM errors?)
+#highway=*                        [0x0a level 0]
+
+# junctions
+junction=roundabout
+	[ 0x00000c level 0 ]
+
+# railways
+# 0x000014 is not displayed on resolutions lower than 200m,
+# therefore line style redefined to unused 0x00000e
+# no tram as in urban areas there
+# are enough hints for orientation already
+railway=* & tunnel=yes
+	{ delete railway }
+railway=* & abandoned=yes
+	{ delete railway }
+railway=*
+	{ name '${name} (${ref})' | '${name}' | '${ref}' }
+railway=rail
+	[ 0x00000e level 0 ]
+railway=light_rail
+	[ 0x00000e level 0 ]
+#railway=subway                   [0x14 level 0]
+#railway=tram                     [0x2c level 0]
+#railway=narrow_gauge             [0x2c level 0]
+#railway=funicular                [0x2c level 0]
+#railway=miniature                [0x2c level 0]
+#railway=monorail                 [0x2c level 0]
+
+route=ferry
+	{ name '${name} (${ref})' | '${name}' | '${ref}' }
+	[ 0x00001a level 0 default_name '[ferry]' ]
+aerialway=*
+	{ name '$(name)'}
+	[ 0x00002d level 0 default_name '[aerialway]' ]
+
+<finalize>
