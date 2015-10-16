@@ -62,4 +62,4 @@ There is a range of techniques and tricks that allows for a size reduction in `m
 
 ### Little helpers
 
-tools/decodimg/ for inspecting block sizes of the Garmin IMG files (still to be documented)
+- `tools/decodimg/GarminIMG.py` is a small tool that parses Garmin image files and prepares an overview of the embedded blocks together with their sizes. This is a useful debug utility that helps assess the impact of configuration changes or different version of `mkgmap`.
