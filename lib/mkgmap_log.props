@@ -1,7 +1,7 @@
 # default level are FINE, WARNING, INFO, SEVERE
 # use with java -Dlog.config=d:\dbg\mkgmap_log.props
 
-.level=INFO
+.level=WARNING
 
 java.util.logging.SimpleFormatter.format=%4$.4s: %3$s  %5$s%n
 handlers: java.util.logging.FileHandler java.util.logging.ConsoleHandler 
