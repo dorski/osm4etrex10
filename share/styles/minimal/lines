@@ -116,6 +116,12 @@ highway=* { set short_name = '${name}' | '' }
 highway=* { set short_name = '${short_name|subst:Straat~>Str|subst:straat$~>str}' }
 highway=* { set short_name = '${short_name|subst:Plein~>Pl|subst:plein$~>pl}' }
 
+# English abbreviation rules
+highway=* { set short_name = '${short_name|subst:Street~>Str}' }
+highway=* { set short_name = '${short_name|subst:Road~>Rd}' }
+highway=* { set short_name = '${short_name|subst:Avenue~>Av}' }
+highway=* { set short_name = '${short_name|subst:Drive~>Drv}' }
+
 # French abbreviation rules
 highway=* { set short_name = '${short_name|subst:^Rue ~>R }' }
 highway=* { set short_name = '${short_name|subst:^Boulevard ~>Bvd }' }
@@ -130,6 +136,7 @@ highway=* { set short_name = '${short_name|subst:Gasse$~>G|subst:gasse$~>g}' }
 
 # Italian abbreviation rules
 highway=* { set short_name = '${short_name|subst:^Via ~>V }' }
+
 # Spanish abbreviation rules
 highway=* { set short_name = '${short_name|subst:^[cC]alle ~>C }' }
 highway=* { set short_name = '${short_name|subst:^[cC]arrer ~>Cr }' }
