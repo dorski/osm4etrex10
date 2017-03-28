@@ -142,6 +142,12 @@ highway=* { set short_name = '${short_name|subst:^[cC]alle ~>C }' }
 highway=* { set short_name = '${short_name|subst:^[cC]arrer ~>Cr }' }
 highway=* { set short_name = '${short_name|subst:^[aA]venida ~>Av }' }
 
+# Swedish abbreviation rules
+highway=* { set short_name = '${short_name|subst:[Gg]atan$~>g}' }
+highway=* { set short_name = '${short_name|subst:[Gg]ata$~>g}' }
+highway=* { set short_name = '${short_name|subst:[vV]ägen$~>v}' }
+highway=* { set short_name = '${short_name|subst:[vV]äg$~>v}' }
+
 highway=* { name
 	'${ref} (${short_name})'
 	| '${short_name}'
