@@ -3,6 +3,8 @@
 # caution: higher unassigned numbers may not display at all 
 # even when a TYP file is provided
 
+include "abbreviations";
+
 ###################################
 # borders #########################
 ###################################
@@ -108,51 +110,6 @@ contour_ext=elevation_minor & (ele > 0 | ele < 0)
 # ignore roads in tunnels
 highway=* & tunnel=yes
 	{ delete highway }
-
-# name all roads
-highway=* { set short_name = '${name}' | '' }
-
-# Dutch abbreviation rules
-highway=* { set short_name = '${short_name|subst:Straat~>Str|subst:straat$~>str}' }
-highway=* { set short_name = '${short_name|subst:Plein~>Pl|subst:plein$~>pl}' }
-
-# English abbreviation rules
-highway=* { set short_name = '${short_name|subst:Street~>Str}' }
-highway=* { set short_name = '${short_name|subst:Road~>Rd}' }
-highway=* { set short_name = '${short_name|subst:Avenue~>Av}' }
-highway=* { set short_name = '${short_name|subst:Drive~>Drv}' }
-
-# French abbreviation rules
-highway=* { set short_name = '${short_name|subst:^Rue ~>R }' }
-highway=* { set short_name = '${short_name|subst:^Boulevard ~>Bvd }' }
-highway=* { set short_name = '${short_name|subst:^Avenue ~>Av }' }
-highway=* { set short_name = '${short_name|subst:^Place ~>Pl }' }
-
-# German abbreviation rules
-highway=* { set short_name = '${short_name|subst:Straße~>Str|subst:straße$~>str}' }
-highway=* { set short_name = '${short_name|subst:Platz~>Pl|subst:platz$~>pl}' }
-highway=* { set short_name = '${short_name|subst:Weg$~>W|subst:weg$~>w}' }
-highway=* { set short_name = '${short_name|subst:Gasse$~>G|subst:gasse$~>g}' }
-
-# Italian abbreviation rules
-highway=* { set short_name = '${short_name|subst:^Via ~>V }' }
-
-# Spanish abbreviation rules
-highway=* { set short_name = '${short_name|subst:^[cC]alle ~>C }' }
-highway=* { set short_name = '${short_name|subst:^[cC]arrer ~>Cr }' }
-highway=* { set short_name = '${short_name|subst:^[aA]venida ~>Av }' }
-
-# Swedish abbreviation rules
-highway=* { set short_name = '${short_name|subst:[Gg]atan$~>g}' }
-highway=* { set short_name = '${short_name|subst:[Gg]ata$~>g}' }
-highway=* { set short_name = '${short_name|subst:[vV]ägen$~>v}' }
-highway=* { set short_name = '${short_name|subst:[vV]äg$~>v}' }
-
-highway=* { name
-	'${ref} (${short_name})'
-	| '${short_name}'
-	| '${ref}'
-}
 
 # roads more or less exclusively for car navigation
 # we display cities/towns/villages early

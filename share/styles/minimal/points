@@ -1,6 +1,8 @@
 # all POIs are Garmin standard POI types except when stated otherwise
 # !! on eTrex10 level ranges don't work and garble the POI indexes !!
 
+include "abbreviations";
+
 # default: tiny black square
 # 0x1200 -- 0x122f i-sign (small black square with white 'i')
 # 0x0012 i-square
@@ -124,8 +126,7 @@ tourism=zoo
 
 # indexed: geographical points --> manmade places
 amenity=place_of_worship
-	{ name '${name|subst:Kirche~>K|subst:kirche ~>k }' }
-	[ 0x006404 level 0 default_name '[place_of_worship]' ]
+	[ 0x006404 level 0 ]
 man_made=tower
 	{ name '$(name)' }
 	[ 0x006411 level 0 default_name '[tower]' ]
@@ -139,15 +140,8 @@ man_made=water_tower
 # 0x6618 -- (group of trees)
 
 # indexed: geographical points --> land features
-natural=peak
-	{ name '${name} (${ele}m)' | '${name}' }
-	[ 0x006616 level 0 default_name '[peak]' ]
-natural=volcano
-	{ name '${name} (${ele}m)' | '${name}' }
-	[ 0x006616 level 0 default_name '[volcano]' ]
-natural=glacier
-	{ name '${name} (${ele}m)' | '${name}' }
-	[ 0x006616 level 0 default_name '[glacier]' ]
+natural=peak | natural=volcano | natural=glacier
+	[ 0x006616 level 0 ]
 natural=stone
 	[ 0x006617 level 0 default_name '[stone]' ]
 

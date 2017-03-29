@@ -1,6 +1,8 @@
 # http://wiki.openstreetmap.org/wiki/GroundTruth_Standard_Garmin_Types#Areas
 # qlandkartegt-1.2.3
 
+include "abbreviations";
+
 # large urban area           0x01
 # small urban area           0x02
 # rural housing area         0x03
@@ -88,7 +90,6 @@ place=island | place=islet
 #landuse=commercial           [0x55 level 0]
 
 natural=water
-	{ name '$(name)' }
 	[ 0x000044 level 0 ]
 natural=wetland
 	{ name '$(name)' }
