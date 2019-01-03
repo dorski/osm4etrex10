@@ -1,6 +1,6 @@
 # osm4etrex10
 
-`osm4etrex10` is a small framework around mkgmap that allows you to create OSM based maps for the rather limited eTrex 10 GPS receivers made by Garmin.
+`osm4etrex10` is a small framework around `mkgmap` that allows you to create OSM based maps for the rather limited eTrex 10 GPS receivers made by Garmin. The maps will also work on other Garmin devices such as the 20(x)/30(x) and probably other device series as well.
 
 There are other frameworks and howto documents on this topic:
 
